@@ -1,0 +1,12 @@
+{
+  "name": "slam",
+  "url" : "https://github.com/bynuff/hxslam",
+  "license": "MIT",
+  "tags": ["lambda", "short lambda", "cross", "utility", "sugar"],
+  "description": "Short lambda library for haxe.",
+  "version": "0.1.0",
+  "classPath": "src/main/haxe/",
+  "releasenote": "Initial release. Every declared features tested and works correctly.",
+  "contributors": ["bynuff"],
+  "dependencies": {}
+}
