@@ -1,5 +1,5 @@
 {
-  "name": "slam",
+  "name": "hxslam",
   "url" : "https://github.com/bynuff/hxslam",
   "license": "MIT",
   "tags": ["lambda", "short lambda", "cross", "utility", "sugar"],
