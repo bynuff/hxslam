@@ -1,6 +1,8 @@
 # hxslam
 
-*Short lambda library for Haxe.*
+[![Lang](https://img.shields.io/badge/language-haxe-orange.svg)](http://haxe.org) [![Version](https://img.shields.io/badge/version-v0.1.1-green.svg)](https://github.com/bynuff/hxslam) [![Dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://github.com/bynuff/hxslam/blob/master/haxelib.json) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+
+*Short lambda cross platform library for Haxe.*
 
 ### Install
 
@@ -10,7 +12,7 @@
  
 ###### *Manual mode:*
 
-> *Library supported manual mode. For activating manual mode, use in your `hxml` project file `-D slamManulMode`. Then mark all classes where will be used short lambda by `@:slam` metadata.*
+> *Library supported manual mode. For activating manual mode, use in your `hxml` project file `-D slamManualMode`. Then mark all classes where will be used short lambda by `@:slam` metadata.*
 
 ### Usage
 

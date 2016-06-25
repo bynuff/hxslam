@@ -1,1 +1,1 @@
---macro addGlobalMetadata("", "@:build(hxslam.SlamMacro.build())")
+--macro hxslam.SlamMacro.global()

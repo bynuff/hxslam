@@ -5,12 +5,17 @@ package hxslam;
 import haxe.macro.Type;
 import haxe.macro.Expr;
 import haxe.macro.Context;
+import haxe.macro.Compiler;
 import haxe.macro.ExprTools;
 
 class SlamMacro {
 
     #if slamManualMode inline static var SLAM_META:String = ":slam"; #end
     inline static var SLAM_PROCESSED_META:String = ":slamProcessed";
+
+    public static function global() {
+        Compiler.addGlobalMetadata("", "@:build(hxslam.SlamMacro.build())");
+    }
 
     public static function build():Array<Field> {
         var classTypeRef:Ref<ClassType> = Context.getLocalClass();
@@ -145,7 +150,6 @@ class SlamMacro {
                     TOptional(getComplexType(e));
                 case ECall(e, params):
                     getComplexType(e, [ for (p in params) TPType(getComplexType(p)) ]);
-//              case EObjectDecl: TODO: implement
                 case EBinop(OpGt, e1, e2):
                     var notSubFunc = function (e:Expr):Bool {
                         return switch (e.expr) {
