@@ -41,6 +41,37 @@ function(a, b, c) return a + b + c; // haxe
 
 > *Use square brackets for arguments.*
 
+* Multiline function:
+
+```haxe
+// haxe
+function(a = "Hello world!") {
+    var result = "";
+    var i = a.length;
+    
+    while (i > 0) {
+        --i;
+        result += a.charAt(i);
+    }
+    
+    return result;
+}
+// hxslam
+(a = "Hello world!") => {
+    var result = "";
+    var i = a.length;
+    
+    while (i > 0) {
+        --i;
+        result += a.charAt(i);
+    }
+        
+    result;
+}
+```
+
+> *Returned value should be at the last line in code block.*
+
 ### Typed arguments:
 
 > *Library also support typed arguments except for anonymous structures.*
