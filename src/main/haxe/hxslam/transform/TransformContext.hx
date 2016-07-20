@@ -17,16 +17,11 @@ class TransformContext implements IContext<Field> {
 
     public function new(fields:Array<Field>) {
         _processedFields = fields;
-        _builderFactory = BuilderFactory.defaultFieldBuilderFactory;
+        _builderFactory = BuilderFactory.fieldBuilderFactory;
     }
 
     public static function createTransformContext(fields:Array<Field>):TransformContext {
         return new TransformContext(fields);
-    }
-
-    public function setBuilderFactory(builderFactory:FeatureBuilderFactory<Field>):TransformContext {
-        _builderFactory = builderFactory;
-        return this;
     }
 
     public function transform():TransformContext {
