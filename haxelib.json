@@ -4,9 +4,9 @@
   "license": "MIT",
   "tags": ["lambda", "short lambda", "cross", "utility", "sugar"],
   "description": "Short lambda cross platform library.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "classPath": "src/main/haxe/",
-  "releasenote": "Code optimization. Readme file updated.",
+  "releasenote": "Features disabling at conditional compilation. Global refactoring and optimization.",
   "contributors": ["bynuff"],
   "dependencies": {}
 }

@@ -14,6 +14,15 @@
 
 > *Library supported manual mode. For activating manual mode, use in your `hxml` project file `-D slamManualMode`. Then mark all classes where will be used short lambda by `@:slam` metadata.*
 
+###### *Features disabling:*
+
+> *Control used features at conditional compilation. By default all features are available.*
+> *For disabling specific feature use one of these conditional compilation flags:*
+>> `-D slamNoTypedFeature`
+>> `-D slamNoPropertyFeature` *(not implemented now)*
+
+> *If all features will be disabled, stays available only simple short lambda with supporting optional and default value arguments.*
+
 ### Usage
 
 * Function without arguments:
