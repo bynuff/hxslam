@@ -41,7 +41,7 @@ class DefaultFeature extends AbstractFeature<Field> {
     function analyzeExpr(fdExpr:Expr):Expr {
         return try {
             switch (fdExpr.expr) {
-                case EBinop(op = OpArrow, e1 = {expr: EParenthesis(e), pos: _}, e2):
+                case EBinop(OpArrow, e1 = {expr: EParenthesis(e), pos: _}, e2):
                     expandExpr(
                         ExprTools.map(e, analyzeExpr),
                         ExprTools.map(e2, analyzeExpr)

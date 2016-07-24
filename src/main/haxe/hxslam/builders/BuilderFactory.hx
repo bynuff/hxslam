@@ -16,13 +16,13 @@ class BuilderFactory {
 
     public static function fieldBuilderFactory(context:IContext<Field>):IFeatureBuilder<Field> {
         return new FeatureBuilder<Field>()
+            #if !slamNoPropertyFeature
+            .setFeature(new PropertyFeature(context.createProcess()))
+            #end
             #if slamNoTypedFeature
             .setFeature(new DefaultFeature(context.createProcess()))
             #else
             .setFeature(new TypedFeature(context.createProcess()))
-            #end
-            #if !slamNoPropertyFeature
-            .setFeature(new PropertyFeature(context.createProcess()))
             #end
             .setContext(context);
     }
