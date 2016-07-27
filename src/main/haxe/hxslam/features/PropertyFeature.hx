@@ -20,21 +20,18 @@ class PropertyFeature extends AbstractFeature<Field> {
     }
 
     override public function apply(field:Field) {
-        trace(field);
-
         if (tryGetPropertyData(field, function (value) generatePropertyFields(field, value))) {
             return;
         }
-
         _process.store(field);
     }
 
-    function tryGetPropertyData(field:Field, out:EPropertyData -> Void):Bool {
+    function tryGetPropertyData(field:Field, out:PropertyData -> Void):Bool {
         return switch (field.kind) {
             case FVar(t, e = {expr: EBlock(exprs), pos: _}) if (exprs.length != 0 && exprs.length <= 2):
                 tryGetPropertyExprs(
                     exprs,
-                    function (value:EPropertyData) {
+                    function (value:PropertyData) {
                         value.type = t;
                         value.isStatic = field.access.indexOf(AStatic) != -1;
                         value.isOverride = field.access.indexOf(AOverride) != -1;
@@ -46,41 +43,42 @@ class PropertyFeature extends AbstractFeature<Field> {
         }
     }
 
-    function tryGetPropertyExprs(fdExprs:Array<Expr>, out:EPropertyData -> Void):Bool {
-        var data:EPropertyData = new EPropertyData();
+    function tryGetPropertyExprs(fdExprs:Array<Expr>, out:PropertyData -> Void):Bool {
+        var data:PropertyData = new PropertyData();
         for (expr in fdExprs) {
             switch (expr.expr) {
                 case EBinop(OpArrow, e1 = {expr: EConst(CIdent(GET)), pos: _}, e2):
-                    if (data.getExpr != null) Context.error("Property get expression already set.", expr.pos);
+                    if (data.getExpr != null)
+                        Context.error("Property getter expression already set.", expr.pos);
                     data.getExpr = e2;
                 case EBinop(OpArrow, e1 = {expr: EConst(CIdent(SET)), pos: _}, e2):
-                    if (data.setExpr != null) Context.error("Property set expression already set.", expr.pos);
+                    if (data.setExpr != null)
+                        Context.error("Property setter expression already set.", expr.pos);
                     data.setExpr = e2;
                 case EBinop(OpArrow, e1 = {expr: EConst(CIdent(UNIVERSAL)), pos: _}, e2):
                     if (data.getExpr != null || data.setExpr != null)
-                        Context.error("Property get/set expression already set.", expr.pos);
+                        Context.error("Property getter/setter expression already set.", expr.pos);
                     data.getExpr = e2;
                     data.setExpr = macro $e2 = value;
                 case _:
                     return false;
             }
         }
-        if (data.getExpr != null || data.setExpr != null) {
+        if (data.isProperty) {
             out(data);
             return true;
         }
         return false;
     }
 
-    function generatePropertyFields(field:Field, data:EPropertyData) {
+    function generatePropertyFields(field:Field, data:PropertyData) {
         var access = [];
         if (data.isStatic) access.push(AStatic);
         if (data.isOverride) access.push(AOverride);
 
-        if (data.isOverride) {
-            if (data.isStatic) Context.error("Static property can not be overriden!", field.pos);
-            _process.store(field);
-        } else {
+        if (data.isOverride && data.isStatic) {
+            Context.error("Static property can not be overridden!", field.pos);
+        } else if (!data.isOverride) {
             _process.store(generateProperty(field, data));
         }
 
@@ -98,7 +96,7 @@ class PropertyFeature extends AbstractFeature<Field> {
 
     }
 
-    function generateProperty(field:Field, data:EPropertyData):Field {
+    function generateProperty(field:Field, data:PropertyData):Field {
         return {
             name: field.name,
             doc: field.doc,
@@ -113,7 +111,7 @@ class PropertyFeature extends AbstractFeature<Field> {
         };
     }
 
-    function generateGetFunction(field:Field, data:EPropertyData, access:Array<Access>):Field {
+    function generateGetFunction(field:Field, data:PropertyData, access:Array<Access>):Field {
         return {
             name: GET + "_" + field.name,
             access: access,
@@ -127,7 +125,7 @@ class PropertyFeature extends AbstractFeature<Field> {
         };
     }
 
-    function generateSetFunction(field:Field, data:EPropertyData, access:Array<Access>):Field {
+    function generateSetFunction(field:Field, data:PropertyData, access:Array<Access>):Field {
         return {
             name: SET + "_" + field.name,
             access: access,
@@ -147,7 +145,7 @@ class PropertyFeature extends AbstractFeature<Field> {
 }
 
 @:allow(hxslam.features.PropertyFeature)
-class EPropertyData {
+class PropertyData {
 
     var isStatic:Bool;
     var isOverride:Bool;
@@ -155,7 +153,13 @@ class EPropertyData {
     var setExpr:Null<Expr>;
     var type:Null<ComplexType>;
 
+    var isProperty(get, never):Bool;
+
     function new() {}
+
+    function get_isProperty():Bool {
+        return getExpr != null || setExpr != null;
+    }
 
 }
 

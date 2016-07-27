@@ -55,11 +55,18 @@ class DefaultFeature extends AbstractFeature<Field> {
     }
 
     function expandExpr(lExpr:Expr, rExpr:Expr):Expr {
-        return parseFuncArgs(lExpr).createFuctionExpr(
-            null, null,
-            macro return $rExpr,
-            lExpr.pos
-        );
+        return {
+            expr: EFunction(
+                null,
+                {
+                    args: parseFuncArgs(lExpr),
+                    ret: null,
+                    expr: macro return $rExpr,
+                    params: null
+                }
+            ),
+            pos: lExpr.pos
+        };
     }
 
     function parseFuncArgs(fExpr:Expr, ?isOpt:Bool):Array<FunctionArg> {

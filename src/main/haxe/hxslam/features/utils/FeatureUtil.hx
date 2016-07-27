@@ -15,26 +15,6 @@ class FeatureUtil {
         }
     }
 
-    public static function createFuctionExpr(
-        fArgs:Array<FunctionArg>, fName:String = null,
-        fRet:Null<ComplexType>, fExpr:Null<Expr>,
-        fParams:Array<TypeParamDecl> = null, fPos:Position
-    ):Expr {
-        return {
-            expr: EFunction(
-                fName,
-                {
-                    args: fArgs,
-                    ret: fRet,
-                    expr: fExpr,
-                    params: fParams
-                }
-            ),
-            pos: fPos
-        };
-    }
-
-
 }
 
 #end
