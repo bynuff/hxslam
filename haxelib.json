@@ -5,7 +5,7 @@
   "tags": ["lambda", "short lambda", "cross", "utility", "sugar"],
   "description": "Short lambda cross platform library.",
   "version": "0.3.0",
-  "classPath": "src/main/haxe/",
+  "classPath": "src/",
   "releasenote": "Short lambdas for properties. Get/set methods generation with override support.",
   "contributors": ["bynuff"],
   "dependencies": {}
