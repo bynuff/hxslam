@@ -1,0 +1,15 @@
+-cp src
+-cp tests
+
+-main TestAll
+
+-dce full
+
+-lib utest
+
+-neko bin/test.n
+-cmd neko bin/test.n
+
+-D slamManualMode
+
+--macro hxslam.SlamMacro.global()
