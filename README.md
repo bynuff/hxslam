@@ -1,6 +1,6 @@
 # hxslam
 
-[![Lang](https://img.shields.io/badge/language-haxe-orange.svg)](http://haxe.org) [![Version](https://img.shields.io/badge/version-v0.3.0-green.svg)](https://github.com/bynuff/hxslam) [![Dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://github.com/bynuff/hxslam/blob/master/haxelib.json) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[![Lang](https://img.shields.io/badge/language-haxe-orange.svg)](http://haxe.org) [![Version](https://img.shields.io/badge/version-v0.3.1-green.svg)](https://github.com/bynuff/hxslam) [![Dependencies](https://img.shields.io/badge/dependencies-none-green.svg)](https://github.com/bynuff/hxslam/blob/master/haxelib.json) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 [![Build Status](https://api.travis-ci.org/bynuff/hxslam.svg?branch=master)](https://travis-ci.org/bynuff/hxslam) [![Build status](https://ci.appveyor.com/api/projects/status/yvlxcdfbd9rdhpdj/branch/master?svg=true)](https://ci.appveyor.com/project/bynuff/hxslam/branch/master)
 
