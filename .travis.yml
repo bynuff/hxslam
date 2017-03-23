@@ -15,20 +15,22 @@ branches:
   only:
     - master
 
-env:
-    matrix:
-    - TARGET=neko,node
-    - TARGET=flash,js
-    - TARGET=cpp
-    - TARGET=cs,java
-
 matrix:
   allow_failures:
     - haxe: development
 
 install:
-  - haxelib dev hxslam .
-  - haxelib git hxmake https://github.com/eliasku/hxmake.git
+  - haxelib install travix
+  - haxelib run travix install
+  - haxelib install utest
 
 script:
-  - haxelib run hxmake test --override-test-target=${TARGET}
+  - haxelib run travix interp
+  - haxelib run travix neko
+  - haxelib run travix python
+  - haxelib run travix node
+  - haxelib run travix flash
+  - haxelib run travix java
+  - haxelib run travix cpp
+  - haxelib run travix cs
+  - haxelib run travix php

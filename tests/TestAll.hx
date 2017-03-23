@@ -32,19 +32,13 @@ class TestAll {
                 isSuccess = isAllTestsPassed(o.result) && isSuccess;
             }
         );
+        #if flash
         runner.onComplete.add(
             function (r) {
-                var exitCode = isSuccess ? 0 : -1;
-
-                #if flash
-                flash.system.System.exit(exitCode);
-                #end
-
-                #if js
-                trace("<hxmake::exit>" + exitCode);
-                #end
+                flash.system.System.exit(isSuccess ? 0 : -1);
             }
         );
+        #end
 
         runner.run();
     }
