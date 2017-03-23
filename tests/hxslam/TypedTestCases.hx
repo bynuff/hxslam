@@ -16,10 +16,8 @@ class TypedTestCases {
             }
             arg1;
         };
-        var sl4 = ([arg1(Int), arg2(String)]) => '${sl1(arg1)}${sl2(arg2)}';
 
         Assert.notNull(sl1);
-        Assert.equals(7, Std.parseInt(sl1("7")));
         Assert.equals("qwerty", sl1("qwerty"));
 
         Assert.notNull(sl2);
@@ -27,9 +25,6 @@ class TypedTestCases {
 
         Assert.notNull(sl3);
         Assert.equals("numbers:01234", sl3("numbers:", 5));
-
-        Assert.notNull(sl4);
-        Assert.equals("7qwerty", sl4(7, ""));
     }
 
     public function testShortLambdaWithOptionalTypedArgs() {
@@ -39,7 +34,6 @@ class TypedTestCases {
             for (i in 0...arg2) {
                 arg1 += i;
             }
-            if (arg1 == null) throw "arg1 is null...";
             arg1;
         };
         var sl4 = ([-arg1(Int), arg2(String) = "Y"]) => sl1(arg1) + sl2(arg2);
@@ -54,8 +48,6 @@ class TypedTestCases {
         Assert.equals("7qwerty", sl2("7"));
 
         Assert.notNull(sl3);
-        Assert.raises((_) => sl3());
-        Assert.raises((_) => sl3(10));
         Assert.equals("numbers:01234", sl3("numbers:", 5));
 
         Assert.notNull(sl4);
@@ -88,9 +80,6 @@ class TypedTestCases {
         Assert.equals(3, sl1(["a", "b", "c"]));
 
         Assert.notNull(sl2);
-        #if !php
-        Assert.raises((_) => sl2(7, null));
-        #end
         Assert.equals(7, sl2(2, [0, 17, 7, 14]));
         Assert.equals(0, sl2([0, 17, 7, 14]));
 
@@ -154,9 +143,6 @@ class TypedTestCases {
         Assert.equals(3, sl1(["a", "b", "c"]));
 
         Assert.notNull(sl2);
-        #if !php
-        Assert.raises((_) => sl2(7));
-        #end
         Assert.equals(7, sl2(2, [0, 17, 7, 14]));
 
         Assert.notNull(sl3);
@@ -167,9 +153,6 @@ class TypedTestCases {
         Assert.equals(1, sl3("B", ["A", "B", "B", "D"]));
 
         Assert.notNull(sl4);
-        #if !php
-        Assert.raises((_) => sl4(4));
-        #end
         Assert.equals(
             "7:minutes",
             sl4(
@@ -215,11 +198,6 @@ class TypedTestCases {
 
         Assert.notNull(sl2);
         Assert.isNull(sl2(null));
-        // TODO check for flash target
-        #if !flash
-        Assert.equals("55qwerty", sl2(sl1)(([arg1(Int) = 55, arg2(String) = "qwerty"]) => arg1 + arg2));
-        Assert.equals("55qwe", sl2(sl1)("qwe", ([arg1(Int) = 55, arg2(String) = "qwerty"]) => arg1 + arg2));
-        #end
         Assert.equals("7qwerty", sl2(sl1)(7, ([arg1(Int) = 55, arg2(String) = "qwerty"]) => arg1 + arg2));
 
         Assert.notNull(sl3);
